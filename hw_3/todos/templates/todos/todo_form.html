@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Жаңа Todo Қосу</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'todos/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>➕ Жаңа Todo Қосу</h1>
+        <form method="POST" class="todo-form">
+            {% csrf_token %}
+            <label for="id_title">📌 Тақырып:</label>
+            {{ form.title }}
+            
+            <label for="id_description">📖 Сипаттама:</label>
+            {{ form.description }}
+
+            <label for="id_due_date">📅 Дедлайн:</label>
+            {{ form.due_date }}
+
+            <label for="id_status">✅ Статус:</label>
+            {{ form.status }}
+
+            <button type="submit" class="add-btn">✅ Сақтау</button>
+        </form>
+        <a href="{% url 'todo_list' %}">
+            <button class="back-btn">🔙 Артқа</button>
+        </a>
+    </div>
+</body>
+</html>

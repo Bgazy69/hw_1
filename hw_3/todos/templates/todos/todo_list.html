@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'todos/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>📌 Менің Todo Тізімім</h1>
+        <div class="todo-list">
+            {% for todo in todos %}
+                <div class="todo-card">
+                    <h3>{{ todo.title }}</h3>
+                    <p><strong>📅 Дедлайн:</strong> {{ todo.due_date }}</p>
+                    <p><strong>📖 Сипаттама:</strong> {{ todo.description|truncatechars:50 }}</p>
+                    <p><strong>✅ Статус:</strong> {% if todo.status %} Аяқталған ✅ {% else %} Аяқталмаған ❌ {% endif %}</p>
+                    <div class="buttons">
+                        <a href="{% url 'todo_detail' todo.id %}">
+                            <button>🔍 Толығырақ</button>
+                        </a>
+                        <a href="{% url 'todo_delete' todo.id %}">
+                            <button class="delete-btn">❌ Өшіру</button>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="{% url 'todo_create' %}">
+            <button class="add-btn">➕ Жаңа Todo қосу</button>
+        </a>
+    </div>
+</body>
+</html>
