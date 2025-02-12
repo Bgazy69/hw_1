@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block title %}Threads{% endblock %}
+{% block content %}
+<style>
+    .threads-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .threads-title {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+    .list-group-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background: #f8f9fa;
+    }
+    .thread-actions {
+        display: flex;
+        gap: 10px;
+    }
+    .modal-content {
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .modal-header {
+        background: #007bff;
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .modal-title {
+        font-weight: bold;
+    }
+    .btn-close {
+        color: white;
+    }
+    .form-label {
+        font-weight: bold;
+    }
+    .btn-primary {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .btn-primary:hover {
+        background: #0056b3;
+    }
+</style>
+
+<div class="threads-container">
+    <h1 class="threads-title">Threads</h1>
+
+    <ul class="list-group">
+        {% for thread in threads %}
+            <li class="list-group-item">
+                <a href="{% url 'thread_detail' thread.id %}" class="fw-bold">{{ thread.name }}</a>
+                <div class="thread-actions">
+                    <a href="{% url 'thread_edit' thread.id %}" class="btn btn-warning btn-sm">Редактировать</a>
+                    <a href="{% url 'thread_delete' thread.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Модальды терезені ашатын батырма -->
+    <button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#createThreadModal">
+        Create Thread
+    </button>
+
+    <!-- Модаль терезе -->
+    <div class="modal fade" id="createThreadModal" tabindex="-1" aria-labelledby="createThreadModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createThreadModalLabel">Create a new Thread</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_name" class="form-label">Name:</label>
+                            <input type="text" name="name" id="id_name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_description" class="form-label">Description:</label>
+                            <textarea name="description" id="id_description" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
