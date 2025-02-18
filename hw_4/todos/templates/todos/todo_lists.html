@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Todo Lists</h1>
+
+    <!-- Кнопка модалды ашу үшін -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTodoListModal">
+        Create Todo List
+    </button>
+
+    <ul class="list-group mt-3">
+        {% for todo_list in todo_lists %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{% url 'todo_list_details' todo_list.id %}" class="text-decoration-none">{{ todo_list.title }}</a>
+                <div>
+                    <a href="{% url 'edit_todo_list' todo_list.id %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'delete_todo_list' todo_list.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Todo List құру үшін модал -->
+    <div class="modal fade" id="createTodoListModal" tabindex="-1" aria-labelledby="createTodoListLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createTodoListLabel">Create Todo List</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{% url 'create_todo_list' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_title" class="form-label">Title</label>
+                            <input type="text" name="title" id="id_title" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_description" class="form-label">Description</label>
+                            <textarea name="description" id="id_description" class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
