@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="mt-4">{{ thread.name }}</h1>
+    <p class="text-muted">{{ thread.description }}</p>
+
+    <!-- Create Post модалын ашу батырмасы -->
+    <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#createPostModal">
+        Create Post
+    </button>
+
+    <div class="container">
+        <div class="row justify-content-center"> <!-- Ортасына жақындатады -->
+            {% for post in posts %}
+                <div class="col-lg-4 col-md-6 col-sm-12"> <!-- Кішірейту үшін 4 бағандық жүйе -->
+                    <div class="card mb-3 shadow-sm" style="max-width: 350px; margin: auto;">
+                        {% if post.picture %}
+                            <img src="{{ post.picture.url }}" alt="{{ post.title }}" class="card-img-top img-fluid" 
+                                 style="height: 200px; width: 100%; object-fit: contain;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h6 class="card-title">{{ post.title }}</h6>
+                            <p class="card-text">{{ post.description|truncatewords:15 }}</p>
+                            <p class="card-text"><small class="text-muted">Author: {{ post.author }}</small></p>
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'edit_post' thread.id post.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'delete_post' thread.id post.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No posts in this thread.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Post құру үшін модал -->
+    <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createPostModalLabel">Create Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{% url 'thread_detail' thread.id %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-success w-100">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
