@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Детали брони</h2>
+
+<p><strong>Клиент:</strong> {{ reservation.customer.name }}</p>
+<p><strong>Телефон:</strong> {{ reservation.customer.phone }}</p>
+<p><strong>Столик №:</strong> {{ reservation.table.number }}</p>
+<p><strong>Количество мест:</strong> {{ reservation.table.seats }}</p>
+<p><strong>Дата бронирования:</strong> {{ reservation.date }}</p>
+<p><strong>Статус:</strong> {{ reservation.get_status_display }}</p>
+
+<!-- Кнопки редактирования и удаления -->
+<a href="{% url 'reservation_edit' reservation.id %}" class="btn btn-primary">Редактировать</a>
+<a href="{% url 'reservation_delete' reservation.id %}" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите удалить бронь?');">Удалить</a>
+
+<a href="{% url 'reservation_list' %}" class="btn btn-secondary">Назад к списку</a>
+{% endblock %}

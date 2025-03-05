@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Доступные столики</h2>
+    <ul class="list-group">
+        {% for table in tables %}
+            <li class="list-group-item">
+                Столик №{{ table.number }} - {{ table.seats }} мест
+            </li>
+        {% empty %}
+            <li class="list-group-item">Нет доступных столиков</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

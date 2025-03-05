@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Список клиентов</h2>
+    <a href="{% url 'customer_create' %}" class="btn btn-primary mb-3">Добавить клиента</a>
+    <ul class="list-group">
+        {% for customer in customers %}
+            <li class="list-group-item">
+                <a href="{% url 'customer_detail' customer.id %}">{{ customer.name }} - {{ customer.phone }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Список столиков</h2>
+    <a href="{% url 'table_create' %}" class="btn btn-primary mb-3">Добавить столик</a>
+    <ul class="list-group">
+        {% for table in tables %}
+            <li class="list-group-item">
+                Столик №{{ table.number }} - {{ table.seats }} мест - 
+                {% if table.is_available %}Доступен{% else %}Занят{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

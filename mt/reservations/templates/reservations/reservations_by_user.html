@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Брони пользователя</h2>
+    <ul class="list-group">
+        {% for reservation in reservations %}
+            <li class="list-group-item">
+                Столик №{{ reservation.table.number }} - {{ reservation.date }} - {{ reservation.get_status_display }}
+            </li>
+        {% empty %}
+            <li class="list-group-item">Нет броней</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'reservation_list' %}" class="btn btn-secondary">Назад</a>
+{% endblock %}
