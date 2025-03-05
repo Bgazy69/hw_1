@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Мои посты</h2>
+    <a href="{% url 'create_post' %}" class="btn btn-success mb-3">Создать пост</a>
+
+    {% for post in posts %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.description }}</p>
+                {% if post.picture %}
+                    <img src="{{ post.picture.url }}" alt="Image" class="img-fluid">
+                {% endif %}
+                <div class="mt-3">
+                    <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Подробнее</a>
+                    <a href="{% url 'edit_post' post.id %}" class="btn btn-warning">Редактировать</a>
+                    <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Удалить</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>У вас пока нет постов.</p>
+    {% endfor %}
+</div>
+{% endblock %}
