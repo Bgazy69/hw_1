@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Todos</h2>
+<a href="{% url 'add_todo' %}" class="btn btn-success mb-3">+ Add Todo</a>
+<ul class="list-group">
+    {% for todo in todos %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{% url 'todo_detail' todo.id %}">{{ todo.title }}</a>
+            
+            <div>
+                <!-- Статус белгісі -->
+                {% if todo.status %}
+                    <span class="badge bg-success">Completed</span>
+                {% else %}
+                    <span class="badge bg-warning">Pending</span>
+                {% endif %}
+                
+                <span class="badge bg-secondary">{{ todo.due_date }}</span>
+                <a href="{% url 'delete_todo' todo.id %}" class="btn btn-danger btn-sm">Delete</a>
+                <a href="{% url 'edit_todo' todo.id %}" class="btn btn-warning btn-sm">Edit</a>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

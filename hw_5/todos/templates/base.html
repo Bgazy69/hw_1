@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+
+    <!-- Локалды Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <!-- Қосымша стиль -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container-custom {
+            max-width: 800px;
+        }
+        .card-custom {
+            border-radius: 12px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}  <!-- Хедерді қайта қостым -->
+
+    <!-- Контент -->
+    <div class="container container-custom mt-5">
+        <div class="card p-4 card-custom bg-white">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Локалды Bootstrap JS -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
+
+

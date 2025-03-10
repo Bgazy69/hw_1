@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Edit Todo</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" value="{{ todo.title }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" name="description" required>{{ todo.description }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Due Date</label>
+            <input type="date" class="form-control" name="due_date" value="{{ todo.due_date|date:'Y-m-d' }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Status</label>
+            <select class="form-control" name="status">
+                <option value="False" {% if not todo.status %}selected{% endif %}>Pending</option>
+                <option value="True" {% if todo.status %}selected{% endif %}>Completed</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="{% url 'todo_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
