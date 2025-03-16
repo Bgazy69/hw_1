@@ -1,0 +1,5 @@
+<h1>{{ post.title }}</h1>
+<p>{{ post.description }}</p>
+<p>Автор: {{ post.author }}</p>
+<a href="{% url 'post_delete' post.id %}">Удалить</a>
+<a href="{% url 'post_list' %}">Назад</a>
