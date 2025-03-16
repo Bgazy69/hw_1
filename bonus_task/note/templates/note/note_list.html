@@ -1,0 +1,14 @@
+{% extends "note/base.html" %}
+
+{% block title %}Список заметок{% endblock %}
+
+{% block content %}
+    <h1>Список заметок</h1>
+    <ul>
+        {% for note in notes %}
+            <li><a href="{% url 'note_detail' note.pk %}">{{ note.title }}</a></li>
+        {% empty %}
+            <p>Нет заметок.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

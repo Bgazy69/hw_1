@@ -1,0 +1,95 @@
+/* 🌌 Жалпы бет стилі */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle, #0f0f0f, #1a1a1a);
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* 🔥 Контейнер */
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+/* 🎇 Тақырып */
+h1 {
+    font-size: 28px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #00eaff;
+}
+
+/* ✏ Инпуттар */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus, textarea:focus {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* 🔘 Батырмалар */
+button {
+    background: linear-gradient(45deg, #00c3ff, #0072ff);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 195, 255, 0.5);
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 195, 255, 0.7);
+}
+
+/* 📜 Жазба карточкалары */
+.note-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    transition: 0.3s;
+}
+
+.note-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 30px rgba(255, 255, 255, 0.3);
+}
+
+/* 🛠 Басқа элементтер */
+a {
+    color: #00eaff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
